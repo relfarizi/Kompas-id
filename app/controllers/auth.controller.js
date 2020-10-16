@@ -7,6 +7,9 @@ const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+
+// function for sign-up
+
 signUp = (req,res) => {
     console.log(req.body.email);
     User.create({
@@ -26,7 +29,7 @@ signUp = (req,res) => {
     
     };
 
-    
+// function for sign-in
 signIn = (req,res) => {
     console.log(req.body)
     User.findOne({
