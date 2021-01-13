@@ -1,6 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
+const News = db.news;
 
 const Op = db.Sequelize.Op;
 
@@ -15,17 +16,21 @@ signUp = (req,res) => {
     User.create({
         email : req.body.email,
         password : bcrypt.hashSync(req.body.password, 8),
-        fullName : req.body.fullName,
-        gender : req.body.gender 
+        nama : req.body.nama,
     })
     .catch((err) => {
             res.status(500).send({ message : err.message });
         });
-    res.status(200).send({
-        email : user.email,
-        fullName : user.fullName,
-        gender : user.gender,
-    })
+    // res.status(200).send({
+    //     email : User.email,
+    //     fullName : User.fullName,
+    //     gender : User.gender,
+    // }).json({"messages" : "succes !"})
+
+    res.status(200).json({
+        "messages" : "Succes",
+        "fullname" : req.body.fullName
+    });
     
     };
 
@@ -75,7 +80,20 @@ signIn = (req,res) => {
     });
 };
 
+news = (req,res) => {
+    console.log(req.body)
+    News.create({
+        judul : req.body.judul,
+        berita : req.body.berita,
+    }).catch((err) => {
+        res.status(500).send({message : err.message})
+    });
+
+    res.status(200).send({message : "succes"})
+}
+
 module.exports = {
     signUp :signUp,
-    signIn : signIn
+    signIn : signIn,
+    news : news
 }

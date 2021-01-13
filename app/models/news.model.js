@@ -1,17 +1,14 @@
 // create database
 
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define("accounts", {
-      email: {
+    const News = sequelize.define("news", {
+      judul: {
         type: Sequelize.STRING
       },
-      password: {
+      berita: {
         type: Sequelize.STRING
       },
-      nama : {
-          type: Sequelize.STRING
-      }
     });
   
-    return User;
+    return News;
   };

@@ -6,6 +6,7 @@ const sequelize = new Sequelize(
   config.DB,
   config.USER,
   config.PASSWORD,
+
   {
     host: config.HOST,
     dialect: config.dialect,
@@ -24,6 +25,7 @@ const db = {
     Sequelize : Sequelize,
     sequelize : sequelize,
     user : require("../models/user.model.js")(sequelize, Sequelize),
+    news : require("../models/news.model.js")(sequelize, Sequelize)
 
 };
 

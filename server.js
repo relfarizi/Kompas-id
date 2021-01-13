@@ -15,23 +15,18 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 const db = require("./app/models");
 
 // Database create
-db.sequelize.sync();
-  /*
+db.sequelize.sync
   ({force: true}).then(() => {
   console.log('Drop and Resync Db');
 });
-*/
-
 
 // root
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to simple API." });
   });
-
 
 // handle header
 app.use(function(req,res,next) {
@@ -44,7 +39,7 @@ app.use(function(req,res,next) {
 
 // hit sign-up
 app.post(
-  "/api/auth/signup",
+  "/signup",
   (req,res,next) => {verifySignUp.checkDuplicateEmail(req,res,next)
   },
   (req1,res1) =>{authController.signUp(req1,res1)}
@@ -52,16 +47,16 @@ app.post(
 
 // hit sign-in
 
-app.post("/api/auth/signin", (req,res) =>{authController.signIn(req,res)});
-
+app.post("/signin", (req,res) =>{authController.signIn(req,res)});
 
 // hit profile page
 app.get(
-  "/api/test/user", 
+  "/homepage",
   [authJwt.verifyToken],
   userController.allAccess
-
 );
+
+app.post("/berita", (req,res) =>{authController.news(req,res)});
 
 
 const PORT = process.env.PORT || 8080;
